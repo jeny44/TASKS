@@ -22,50 +22,64 @@
       Marks:
       <input type="number" id="marks" /> <br />
       <br />
-      Status: 
+      Status:
       <input type="radio" id="pass" name="status" />
       Pass
-      <input type="radio" id="fail" name="status" /> 
+      <input type="radio" id="fail" name="status" />
       Fail <br />
       <br />
-      <input type="submit"  id="Submit" onsubmit="onSubmit()" value="SAVE" />
+      <input type="submit" id="Submit" onsubmit="onSubmit()" value="SAVE" />
     </form>
     <script>
+      const params = new URLSearchParams(window.location.search);
+      const userId = params.get("id");
+      url = "http://localhost:3000/users";
 
-        url = 'http://localhost:3000/users';
-        document.getElementById('addUserForm').addEventListener('submit', function (event) {
-        event.preventDefault();
+      const idnumber = document.getElementById("idnum");
+          const Fname = document.getElementById("name");
+          const mobileNum = document.getElementById("monum");
+          const EmailId = document.getElementById("email");
+          const Marks1 = document.getElementById("marks");
+          const StatusChk = document.getElementById("pass");
+      document
+        .getElementById("addUserForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
 
-            const Fname = document.getElementById('name');
-            const mobileNum = document.getElementById('monum');
-            const EmailId = document.getElementById('email')
-            const Marks1 = document.getElementById('marks')
-            const StatusChk = document.getElementById('pass')
+          const newUser = {
+            name: Fname.value,
+            mobile: mobileNum.value,
+            email: EmailId.value,
+            marks: Marks1.value,
+            status: StatusChk.checked ? "pass" : "fail",
+          };
 
-        const newUser = {
-          name: Fname.value,
-          mobile: mobileNum.value, 
-          email: EmailId.value,
-          marks: Marks1.value,
-          status: StatusChk.checked? 'pass' : "fail", 
-        }
+          fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newUser),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              document.getElementById("addUserForm").reset();
+              fetchUsers();
+              console.log(data);
+            })
+            .catch((error) => console.error("Error creating user:", error));
+        });
 
-        fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newUser),
-        })
+      if (userId) {
+        fetch(`${url}/${userId}`)
           .then((response) => response.json())
-          .then((data) => {
-            
-            document.getElementById('addUserForm').reset();
-            fetchUsers();
-            console.log(data);
-        })
-        .catch((error) => console.error('Error creating user:', error));
-    });
-
-    //   window.location.href = "index.html";|
+          .then((user) => {
+            idnumber.value = user.id;
+            Fname.value = user.name;
+            mobileNum.value = user.mobile;
+            EmailId.value = user.email;
+            Marks1.value = user.marks;
+            StatusChk.value = user.status;
+          });
+      }
     </script>
   </body>
 </html>

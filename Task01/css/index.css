@@ -3,40 +3,50 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    /* margin: 20px; */
+    background-color: #1E201E
 }
 
-#userlist {
-  margin-top: 20px;
-}
-.head{
+.head {
     text-align: center;
-    background-color: rgb(211, 147, 69);
+    background-color: #ECDFCC;
+}
+#bt1{
+    margin: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #ECDFCC;
+    color: black;
+}
+#userlist {
+    margin: 10px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-evenly
 }
 
-#userlist{
-    background: rgb(105, 147, 184);
-    margin: 10px 0px;
-}
-  .user-card {
+.user-card {
     border: 1px solid #ddd;
     padding: 15px;
-    margin: 10px 0;
     border-radius: 5px;
+    width:400px;
     background-color: #f9f9f9;
+    font-weight: 900;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-  }
+}
 
-  .user-card div {
+.user-card div {
     font-size: 14px;
     line-height: 1.6;
     color: #333;
-  }
+}
 
-  .user-card input[type="button"] {
+.user-card input[type="button"] {
     margin: 5px;
     padding: 8px 15px;
     font-size: 14px;
@@ -45,9 +55,8 @@ body {
     cursor: pointer;
     background-color: #007bff;
     color: white;
-  }
+}
 
-  .user-card input[type="button"]:hover {
+.user-card input[type="button"]:hover {
     background-color: #0056b3;
-  }
-
+}
