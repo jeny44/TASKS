@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task01 | Page-1</title>
+  </head>
+  <body>
+    <a href="index.html"><button>HOME</button></a> <br />
+    <br />
+    <form action="" id="addUserForm">
+      <input type="hidden" id="idnum" />
+      Name:
+      <input type="text" id="name" /> <br />
+      <br />
+      Email:
+      <input type="email" id="email" /> <br />
+      <br />
+      Mobile No:
+      <input type="number" id="monum" /> <br />
+      <br />
+      Marks:
+      <input type="number" id="marks" /> <br />
+      <br />
+      Status: 
+      <input type="radio" id="pass" name="status" />
+      Pass
+      <input type="radio" id="fail" name="status" /> 
+      Fail <br />
+      <br />
+      <input type="submit"  id="Submit" onsubmit="onSubmit()" value="SAVE" />
+    </form>
+    <script>
+
+        url = 'http://localhost:3000/users';
+        document.getElementById('addUserForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+            const Fname = document.getElementById('name');
+            const mobileNum = document.getElementById('monum');
+            const EmailId = document.getElementById('email')
+            const Marks1 = document.getElementById('marks')
+            const StatusChk = document.getElementById('pass')
+
+        const newUser = {
+          name: Fname.value,
+          mobile: mobileNum.value, 
+          email: EmailId.value,
+          marks: Marks1.value,
+          status: StatusChk.checked? 'pass' : "fail", 
+        }
+
+        fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newUser),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            
+            document.getElementById('addUserForm').reset();
+            fetchUsers();
+            console.log(data);
+        })
+        .catch((error) => console.error('Error creating user:', error));
+    });
+
+    //   window.location.href = "index.html";|
+    </script>
+  </body>
+</html>

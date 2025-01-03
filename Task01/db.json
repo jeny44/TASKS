@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": "a88b",
+      "name": "jeny",
+      "mobile": "56",
+      "email": "jeny@gmail.com",
+      "marks": "4",
+      "status": "fail"
+    },
+    {
+      "id": "5cf3",
+      "name": "jeny",
+      "mobile": "9909243421",
+      "email": "abc@gmail.com",
+      "marks": "59",
+      "status": "pass"
+    }
+  ]
+}
